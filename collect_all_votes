@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+print('hello')
+
+import subprocess
+
+start_year = 2013
+congress = 113  
+end_year = 2020
+session = start_year
+while session <= end_year:
+    bashCommand = "./run votes --congress={fcongress} --session={fsession}".format(fcongress = int(congress), fsession = session)
+    process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+    output, error = process.communicate()
+    session += 1
+    congress += 0.5
+
+
