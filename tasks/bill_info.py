@@ -161,9 +161,8 @@ def sponsor_for(sponsor_dict):
         # TODO: This can hopefully be removed. In testing s414-113
         # was missing sponsor data. But all bills have a sponsor?
         return None
-
     # TODO: Don't do regex matching here. Find another way.
-    m = re.match(r'(?P<title>(Rep|Sen))\. (?P<name>.*?) +\[(?P<party>[DRI])-(?P<state>[A-Z][A-Z])(-(?P<district>\d{1,2}|At Large|None))?\]$',
+    m = re.match(r'(?P<title>(Rep|Sen))\. (?P<name>.*?) +\[(?P<party>[DRIL])-(?P<state>[A-Z][A-Z])(-(?P<district>\d{1,2}|At Large|None))?\]$',
         sponsor_dict['fullName'])
 
     if not m:
