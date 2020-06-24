@@ -721,10 +721,7 @@ def require_congress_legislators_repo():
 lookup_legislator_cache = []
 
 
-def lookup_legislator(congress, role_type, name, state, party, when, id_requested, exclude=set()):
-    # This is a basic lookup function given the legislator's name, state, party,
-    # and the date of the vote.
-
+def create_legislator_yaml():
     # On the first load, cache all of the legislators' terms in memory.
     # Group by Congress so we can limit our search later to be faster.
     global lookup_legislator_cache
@@ -737,6 +734,15 @@ def lookup_legislator(congress, role_type, name, state, party, when, id_requeste
                     for c in xrange(congress_from_legislative_year(int(term['start'][0:4])) - 1,
                                     congress_from_legislative_year(int(term['end'][0:4])) + 1 + 1):
                         lookup_legislator_cache.setdefault(c, []).append((moc, term))
+
+
+
+def lookup_legislator(congress, role_type, name, state, party, when, id_requested, exclude=set()):
+    # This is a basic lookup function given the legislator's name, state, party,
+    # and the date of the vote.
+
+    # This will generate the legislator yaml if it is not already in existence.
+    create_legislator_yaml()
 
     def to_ascii(name):
         name = name.replace("-", " ")

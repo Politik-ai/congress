@@ -34,6 +34,8 @@ for arg in sys.argv[2:]:
         options[key.lower()] = value
 
 
+
+
 # configure logging
 if options.get('debug', False):
     log_level = "debug"
@@ -52,6 +54,9 @@ else:
 
 sys.path.append(os.path.join(CONGRESS_ROOT, "tasks"))
 import utils
+
+#generate the legislator repo if not already there
+utils.create_legislator_yaml()
 
 try:
     task_mod = __import__(task_name)
